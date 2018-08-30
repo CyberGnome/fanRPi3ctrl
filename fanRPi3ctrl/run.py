@@ -5,10 +5,13 @@ import settings as params
 
 
 if __name__ == "__main__":
+    fan_ctrl = fanRPi3ctrl.FanRPi3ctrl(params.temp_on,
+                                       params.temp_off,
+                                       params.delay_ms)
     try:
-        fanRPi3ctrl.setup()
+        fan_ctrl.sysctl.setup_gpio()
         while True:
-            fanRPi3ctrl.control_temp()
-            fanRPi3ctrl.delay(params.delay_ms)
+            fan_ctrl.fan_control()
+            fan_ctrl.delay()
     except KeyboardInterrupt:
-        fanRPi3ctrl.cleanup()
+        fan_ctrl.clean_gpio()
