@@ -14,4 +14,4 @@ if __name__ == "__main__":
             fan_ctrl.fan_control()
             fan_ctrl.delay()
     except KeyboardInterrupt:
-        fan_ctrl.clean_gpio()
+        fan_ctrl.sysctl.clean_gpio()

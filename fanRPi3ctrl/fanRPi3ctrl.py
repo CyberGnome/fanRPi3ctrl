@@ -60,7 +60,7 @@ class SystemControl:
 
 class FanRPi3ctrl:
     def __init__(self, t_on, t_off, delay_ms):
-        self.fan_on = False
+        self.fan_is_on = False
         self.temp_on = t_on
         self.temp_off = t_off
         self.delay_time = delay_ms
@@ -75,18 +75,18 @@ class FanRPi3ctrl:
 
     def delay(self):
         s = float(self.delay_time) / 1000.0
-        self.sysctl.set_pin("Wait %f seconds..." % s)
+        self.sysctl.h_logs.out("Wait %f seconds..." % s)
         sleep(s)
 
     def fan_control(self):
         cpu_temp = self.sysctl.get_cpu_temp()
-        if self.fan_on is False:
+        if self.fan_is_on is False:
             if cpu_temp >= self.temp_on:
                 self.fan_on()
-                self.fan_on = True
-                self.delay_time * self.time_factor
+                self.fan_is_on = True
+                self.delay_time *= self.time_factor
         else:
             if cpu_temp <= self.temp_off:
                 self.fan_off()
-                self.fan_on = False
-                self.delay_time / self.time_factor
+                self.fan_is_on = False
+                self.delay_time /= self.time_factor
