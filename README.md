@@ -12,31 +12,9 @@ Fan control script for raspberry pi
 ````
 
 You can demonize your fanRPi3ctrl and add it in *autostart*.
-
-You must create file:
+For example you can add crone job:
 ````
-nano /etc/init.d/fanRPi3ctrl
-````
-
-Then you must copy-paste in it the following code
-````
-#!/bin/sh
-### BEGIN INIT INFO
-# Provides: dnscheck
-# Required-Start: $remote_fs $syslog
-# Required-Stop: $remote_fs $syslog
-# Short-Description: Start fan script at boot time
-# Description: Enable service provided by daemon.
-### END INIT INFO
-
-python3 /path/to/folder/with/project/run.py [>> /path/to/folder/with/logs]
-````
-
-You must write *">> /path/to/folder/with/logs"* if you want to save logs from fanRPi3ctrl.
-
-And create the symbolic links by running:
-````
-update-rc.d /etc/init.d/dnscheck defaults
+@reboot /path/to/fanRPi3ctrl/project/run.py >/path/to/cronlog 2>&1
 ````
 
 ## Release History
