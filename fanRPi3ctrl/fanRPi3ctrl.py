@@ -14,7 +14,13 @@ def print_log(msg, lvl=3):
         print("LOG: %s [%s]" % (msg, str(datetime.datetime.now())))
 
 
+def cleanup():
+    GPIO.cleanup()
+    print_log("GPIO cleanup")
+
+
 def setup():
+    GPIO.cleanup()
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(params.pin, GPIO.OUT)
     GPIO.setwarnings(False)
@@ -58,6 +64,3 @@ def delay(ms):
     sleep(s)
 
 
-def cleanup():
-    GPIO.cleanup()
-    print_log("GPIO cleanup")
