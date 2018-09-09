@@ -4,8 +4,8 @@ pin = 18         # control pin
 
 
 # Fan settings
-temp_on = 48.5   # fan start temperature
-temp_off = 40.0  # fan stop temperature
+temp_on = 46.0   # fan start temperature
+temp_off = 44.0  # fan stop temperature
 
 delay_ms = 15000  # interval between CPU temperature checks
 
