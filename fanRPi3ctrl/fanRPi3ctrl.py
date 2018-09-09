@@ -84,11 +84,11 @@ class FanRPi3ctrl:
             if cpu_temp >= self.temp_on:
                 self.fan_on()
                 self.fan_is_on = True
-                self.sysctl.h_logs.out("Fan ON (t=%f)" % cpu_temp, 1)
+                self.sysctl.h_logs.out("Fan ON (t=%.1f)" % cpu_temp, 1)
                 self.delay_time *= self.time_factor
         else:
             if cpu_temp <= self.temp_off:
                 self.fan_off()
                 self.fan_is_on = False
-                self.sysctl.h_logs.out("Fan OFF (t=%f)" % cpu_temp, 1)
+                self.sysctl.h_logs.out("Fan OFF (t=%.1f)" % cpu_temp, 1)
                 self.delay_time /= self.time_factor
