@@ -53,9 +53,9 @@ class SystemControl:
     def set_pin(self, mode):
         GPIO.output(params.pin, mode)
         if mode is True:
-            self.h_logs.out("Fan ON", 1)
+            self.h_logs.out("Set PIN ON", 3)
         else:
-            self.h_logs.out("Fan OFF", 1)
+            self.h_logs.out("Set PIN OFF", 3)
 
 
 class FanRPi3ctrl:
@@ -84,9 +84,11 @@ class FanRPi3ctrl:
             if cpu_temp >= self.temp_on:
                 self.fan_on()
                 self.fan_is_on = True
+                self.sysctl.h_logs.out("Fan ON (t=%f)" % cpu_temp, 1)
                 self.delay_time *= self.time_factor
         else:
             if cpu_temp <= self.temp_off:
                 self.fan_off()
                 self.fan_is_on = False
+                self.sysctl.h_logs.out("Fan OFF (t=%f)" % cpu_temp, 1)
                 self.delay_time /= self.time_factor
